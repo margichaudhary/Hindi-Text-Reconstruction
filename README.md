@@ -1,6 +1,6 @@
 # Hindi Text Reconstruction
 
-A Natural Language Processing (NLP) project that reconstructs Hindi text by restoring punctuation, estimating sentence order, grouping sentences, and translating the reconstructed text into English.
+A Natural Language Processing (NLP) project that processes unstructured Hindi text by restoring punctuation, estimating sentence order, grouping sentences, and translating the reconstructed text into English.
 
 ## Project Overview
 
@@ -22,6 +22,7 @@ The pipeline consists of four major stages:
 - TF-IDF and Cosine Similarity
 - Hugging Face Transformers
 - IndicTrans2
+- Jupyter Notebook
 - Google Colab
 
 ## Project Structure
@@ -43,6 +44,9 @@ Hindi-Text-Reconstruction/
 │       ├── tokenizer.json
 │       ├── tokenizer_config.json
 │       └── special_tokens_map.json
+│
+├── notebooks/
+│   └── indictrans2_translation.ipynb
 │
 ├── src/
 │   ├── inspect_data.py
@@ -102,15 +106,27 @@ Hindi-Text-Reconstruction/
 - Used CPU inference to avoid GPU memory requirements.
 - Saved the translated outputs for all seven samples.
 
+## Jupyter Notebook
+
+The `notebooks/` directory contains the Jupyter notebook used for the Hindi-to-English translation stage.
+
+**`indictrans2_translation.ipynb`**
+
+- Contains the IndicTrans2 model setup and initialization.
+- Implements batch translation of grouped Hindi text into English.
+- Demonstrates the translation workflow using Google Colab.
+
+The remaining stages of the project, including preprocessing, punctuation restoration, sentence ordering, and grouping, are implemented separately using Python scripts in the `src/` directory.
+
 ## Dataset Summary
 
-| Metric              | Result |
-| ------------------- | -----: |
-| Input files         |      7 |
-| Total words         |  5,821 |
-| NULL markers        |     67 |
-| Punctuated segments |    368 |
-| Sentence groups     |     76 |
+| Metric | Result |
+|---|---:|
+| Input files | 7 |
+| Total words | 5,821 |
+| NULL markers | 67 |
+| Punctuated segments | 368 |
+| Sentence groups | 76 |
 
 ## Models Used
 
@@ -120,6 +136,8 @@ Hindi-Text-Reconstruction/
 **Hindi-to-English Translation:**  
 [AI4Bharat IndicTrans2](https://huggingface.co/ai4bharat/indictrans2-indic-en-dist-200M)
 
+Both models are pretrained models used for inference. No models were trained from scratch or fine-tuned.
+
 The ONNX model binary is excluded from this repository because of its large file size. The required model file must be obtained separately and placed in the expected model directory before running punctuation restoration.
 
 ## Installation
@@ -127,7 +145,7 @@ The ONNX model binary is excluded from this repository because of its large file
 Clone the repository:
 
 ```bash
-git clone https://github.com/vishu-py/Hindi-Text-Reconstruction.git
+git clone https://github.com/margichaudhary/Hindi-Text-Reconstruction.git
 cd Hindi-Text-Reconstruction
 ```
 
@@ -146,20 +164,4 @@ pip install -r requirements.txt
 
 ## Important Notes
 
-- Translation was performed separately in Google Colab using IndicTrans2.
-- The punctuation restoration model runs locally using ONNX Runtime.
-- Sentence ordering is based on semantic similarity and is a heuristic estimate, not a guaranteed reconstruction of the original order.
-- NULL markers are preserved during preprocessing rather than automatically removed.
-
-## Outputs
-
-The `outputs/` directory contains the results of each stage:
-
-- `punctuated/` – Hindi text with restored punctuation.
-- `ordered/` – Sentences arranged using similarity-based ordering.
-- `grouped/` – Sentences grouped into sets of five.
-- `translated/` – English translations of the grouped Hindi text.
-
-## Project Goal
-
-The goal is to develop a practical NLP pipeline for processing unstructured Hindi text, restoring its readability, estimating sentence sequence, and translating the reconstructed content into English.
+- Translation was performed

@@ -1,6 +1,21 @@
+
+# Python environment and cache
 venv/
+.venv/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
-models/*
-!models/.gitkeep
+
+# Hugging Face cache
+models/punctuation/.cache/
+
+# Large ONNX model (download separately)
+models/punctuation/onnx/*.onnx
+
+# Temporary archives
+grouped_data.zip
+translated_results.zip
+
+# OS files
+.DS_Store
+Thumbs.db
